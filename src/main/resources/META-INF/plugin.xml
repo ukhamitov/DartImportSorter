@@ -1,0 +1,37 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>com.ukhamitov.dartimportsorter</id>
+    <name>Dart Import Sorter</name>
+    <vendor email="ukhamitov@gmail.com" url="https://ukhamitov.com">Ural Khamitov</vendor>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <projectConfigurable
+                instance="com.ukhamitov.dartimportsorter.DartImportSorterSettingsConfigurable"
+                id="com.ukhamitov.DartImportSorterSettingsConfigurable"
+                displayName="Dart Import Sorter"
+                nonDefaultProject="true"
+        />
+    </extensions>
+
+    <projectListeners>
+        <listener class="com.ukhamitov.dartimportsorter.DartImportSorterSaveFileListener" topic="com.intellij.openapi.fileEditor.FileDocumentManagerListener"/>
+    </projectListeners>
+
+    <!--icon="TidyIcons.PluginIcon"-->
+    <actions>
+        <action id="com.ukhamitov.dartimportsorter" class="com.ukhamitov.dartimportsorter.DartImportSorter"
+                description="Group imports" text="Dart Import Sorter">
+            <override-text place="MainMenu" text="Dart Import Sorter" />
+            <keyboard-shortcut first-keystroke="control alt SEMICOLON" second-keystroke="C" keymap="$default"/>
+            <mouse-shortcut keymap="$default" keystroke="control button3 doubleClick"/>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last" />
+        </action>
+    </actions>
+</idea-plugin>
